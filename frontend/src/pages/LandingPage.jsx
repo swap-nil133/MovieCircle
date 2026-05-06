@@ -29,6 +29,10 @@ export default function LandingPage() {
           Create private groups with friends, track movies, share ratings, and discover what to watch next — all in one place.
         </p>
 
+        <p className="text-sm text-gray-500 mt-3">
+          Developed by <span className="text-yellow-400 font-medium">SwapNIL</span>
+        </p>
+
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link to="/register" className="btn-primary text-lg px-8 py-3.5">
             Get Started Free
