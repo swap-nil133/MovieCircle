@@ -14,17 +14,28 @@ export default function GroupPage() {
   const { groupId } = useParams();
   const navigate = useNavigate();
   const { user } = useAuthStore();
+
   const { fetchGroup, currentGroup, loading: groupLoading } = useGroupStore();
-  const { fetchMovies, fetchTopRated, fetchRecommendations, movies, filters, clearMovies } = useMovieStore();
+
+  const {
+    fetchMovies,
+    fetchTopRated,
+    fetchRecommendations,
+    movies,
+    filters,
+    clearMovies,
+  } = useMovieStore();
+
   const [showAddMovie, setShowAddMovie] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const [activeSection, setActiveSection] = useState('all'); // 'all' | 'top-rated' | 'recommendations'
+  const [activeSection, setActiveSection] = useState('all');
 
   useEffect(() => {
     if (groupId) {
       fetchGroup(groupId);
       loadMovies();
     }
+
     return () => clearMovies();
   }, [groupId]);
 
@@ -42,10 +53,14 @@ export default function GroupPage() {
     return (
       <div className="min-h-screen">
         <Navbar />
+
         <div className="flex items-center justify-center h-[80vh]">
           <div className="text-center">
             <div className="w-12 h-12 border-2 border-cinema-gold/30 border-t-cinema-gold rounded-full animate-spin mx-auto mb-4" />
-            <p className="text-cinema-subtle">Loading group...</p>
+
+            <p className="text-cinema-subtle">
+              Loading group...
+            </p>
           </div>
         </div>
       </div>
@@ -56,12 +71,29 @@ export default function GroupPage() {
     return (
       <div className="min-h-screen">
         <Navbar />
+
         <div className="flex items-center justify-center h-[80vh]">
           <div className="text-center">
-            <div className="text-5xl mb-4">🚫</div>
-            <h2 className="font-display text-2xl font-semibold mb-3">Group not found</h2>
-            <p className="text-cinema-subtle mb-6">This group doesn't exist or you don't have access.</p>
-            <button onClick={() => navigate('/dashboard')} className="btn-primary">Back to Dashboard</button>
+
+            <div className="text-5xl mb-4">
+              🚫
+            </div>
+
+            <h2 className="font-display text-2xl font-semibold mb-3">
+              Group not found
+            </h2>
+
+            <p className="text-cinema-subtle mb-6">
+              This group doesn't exist or you don't have access.
+            </p>
+
+            <button
+              onClick={() => navigate('/dashboard')}
+              className="btn-primary"
+            >
+              Back to Dashboard
+            </button>
+
           </div>
         </div>
       </div>
@@ -72,37 +104,53 @@ export default function GroupPage() {
     <div className="min-h-screen">
       <Navbar />
 
-      <div className="max-w-screen-xl mx-auto px-4 py-6 flex gap-6">
-        {/* Sidebar */}
-        <Sidebar
-          group={currentGroup}
-          activeSection={activeSection}
-          onSectionChange={setActiveSection}
-          onFilterChange={handleFilterChange}
-        />
+      <div className="max-w-screen-xl mx-auto px-3 sm:px-4 py-4 sm:py-6 flex flex-col lg:flex-row gap-6">
 
-        {/* Main content */}
-        <main className="flex-1 min-w-0">
+        {/* Main content FIRST on mobile */}
+        <main className="flex-1 min-w-0 order-1 lg:order-2">
+
           {/* Group header */}
-          <div className="flex items-start justify-between mb-6 animate-fade-in">
-            <div>
-              <div className="flex items-center gap-3 mb-1">
+          <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4 mb-6 animate-fade-in">
+
+            <div className="min-w-0">
+
+              <div className="flex items-center gap-2 flex-wrap mb-1">
                 <button
                   onClick={() => navigate('/dashboard')}
                   className="text-cinema-subtle hover:text-cinema-text transition-colors text-sm"
                 >
                   ← Dashboard
                 </button>
-                <span className="text-cinema-border">›</span>
-                <span className="text-cinema-subtle text-sm">{currentGroup?.name}</span>
+
+                <span className="text-cinema-border">
+                  ›
+                </span>
+
+                <span className="text-cinema-subtle text-sm truncate">
+                  {currentGroup?.name}
+                </span>
               </div>
-              <h1 className="font-display text-3xl font-bold text-cinema-text">{currentGroup?.name}</h1>
+
+              <h1 className="font-display text-2xl sm:text-3xl font-bold text-cinema-text break-words">
+                {currentGroup?.name}
+              </h1>
+
               {currentGroup?.description && (
-                <p className="text-cinema-subtle mt-1">{currentGroup.description}</p>
+                <p className="text-cinema-subtle mt-1 break-words">
+                  {currentGroup.description}
+                </p>
               )}
-              <div className="flex items-center gap-3 mt-2">
-                <span className="badge-muted">👥 {currentGroup?.members?.length} members</span>
-                <span className="badge-muted">🎬 {movies.length} movies</span>
+
+              <div className="flex flex-wrap items-center gap-2 mt-3">
+
+                <span className="badge-muted">
+                  👥 {currentGroup?.members?.length} members
+                </span>
+
+                <span className="badge-muted">
+                  🎬 {movies.length} movies
+                </span>
+
                 <span
                   className="font-mono text-xs text-cinema-gold bg-cinema-gold/10 px-2 py-1 rounded cursor-pointer hover:bg-cinema-gold/20 transition-colors"
                   onClick={() => {
@@ -113,19 +161,23 @@ export default function GroupPage() {
                 >
                   {currentGroup?.inviteCode}
                 </span>
+
               </div>
             </div>
 
+            {/* Add Movie button */}
             <button
               onClick={() => setShowAddMovie(true)}
-              className="btn-primary flex items-center gap-2 whitespace-nowrap"
+              className="btn-primary flex items-center justify-center gap-2 whitespace-nowrap w-full sm:w-auto"
             >
               + Add Movie
             </button>
+
           </div>
 
           {/* Section tabs */}
-          <div className="flex gap-1 mb-6 bg-cinema-card rounded-xl p-1 border border-cinema-border w-fit">
+          <div className="flex flex-wrap gap-2 mb-6 bg-cinema-card rounded-xl p-1 border border-cinema-border w-full sm:w-fit">
+
             {[
               { id: 'all', label: '🎬 All Movies' },
               { id: 'top-rated', label: '⭐ Top Rated' },
@@ -143,6 +195,7 @@ export default function GroupPage() {
                 {label}
               </button>
             ))}
+
           </div>
 
           {/* Movie grid */}
@@ -152,7 +205,19 @@ export default function GroupPage() {
             onMovieClick={setSelectedMovie}
             onRefresh={loadMovies}
           />
+
         </main>
+
+        {/* Sidebar BELOW on mobile */}
+        <div className="w-full lg:w-64 flex-shrink-0 order-2 lg:order-1">
+          <Sidebar
+            group={currentGroup}
+            activeSection={activeSection}
+            onSectionChange={setActiveSection}
+            onFilterChange={handleFilterChange}
+          />
+        </div>
+
       </div>
 
       {showAddMovie && (
