@@ -29,6 +29,11 @@ export default function DashboardPage() {
             <h1 className="font-display text-4xl font-bold text-cinema-text">
               Hey, <span className="gradient-text">{user?.username}</span> 👋
             </h1>
+            <span>
+              <p className="text-sm text-gray-500 mt-1">
+               Developed by <span className="text-yellow-400 font-medium">SwapNIL</span>
+              </p>
+            </span>
             <p className="text-cinema-subtle mt-2">Your movie circles are waiting.</p>
           </div>
           <div className="flex gap-3">
