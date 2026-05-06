@@ -1,0 +1,156 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-cinema-black text-cinema-text font-body;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply antialiased;
+    background-color: #0a0a0f;
+    background-image: 
+      radial-gradient(ellipse at 20% 50%, rgba(230, 57, 70, 0.04) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(46, 196, 182, 0.03) 0%, transparent 50%);
+    min-height: 100vh;
+  }
+
+  * {
+    @apply border-cinema-border;
+    box-sizing: border-box;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #111118;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #2a2a3d;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3a3a5d;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-cinema-gold text-cinema-black font-semibold px-5 py-2.5 rounded-lg 
+           hover:bg-cinema-gold-dim transition-all duration-200 
+           active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed
+           focus:outline-none focus:ring-2 focus:ring-cinema-gold focus:ring-offset-2 focus:ring-offset-cinema-dark;
+  }
+
+  .btn-secondary {
+    @apply bg-cinema-muted text-cinema-text font-medium px-5 py-2.5 rounded-lg 
+           hover:bg-cinema-border transition-all duration-200 
+           active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed
+           border border-cinema-border hover:border-cinema-subtle
+           focus:outline-none focus:ring-2 focus:ring-cinema-subtle focus:ring-offset-2 focus:ring-offset-cinema-dark;
+  }
+
+  .btn-danger {
+    @apply bg-cinema-accent text-white font-semibold px-5 py-2.5 rounded-lg 
+           hover:bg-cinema-accent-dim transition-all duration-200 
+           active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .input-field {
+    @apply w-full bg-cinema-muted border border-cinema-border rounded-lg px-4 py-3
+           text-cinema-text placeholder-cinema-subtle
+           focus:outline-none focus:ring-2 focus:ring-cinema-gold focus:border-transparent
+           transition-all duration-200;
+  }
+
+  .card {
+    @apply bg-cinema-card border border-cinema-border rounded-xl shadow-card;
+  }
+
+  .glass-card {
+    @apply bg-cinema-card/60 backdrop-blur-sm border border-cinema-border/60 rounded-xl;
+  }
+
+  .section-title {
+    @apply font-display text-xl font-semibold text-cinema-text tracking-wide;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-gold {
+    @apply badge bg-cinema-gold/20 text-cinema-gold border border-cinema-gold/30;
+  }
+
+  .badge-teal {
+    @apply badge bg-cinema-teal/20 text-cinema-teal border border-cinema-teal/30;
+  }
+
+  .badge-muted {
+    @apply badge bg-cinema-muted text-cinema-subtle border border-cinema-border;
+  }
+
+  .shimmer {
+    background: linear-gradient(90deg, #16161f 25%, #1e1e2e 50%, #16161f 75%);
+    background-size: 200% 100%;
+    @apply animate-shimmer;
+  }
+}
+
+/* Star rating styles */
+.star-rating {
+  display: flex;
+  gap: 2px;
+}
+
+.star-rating button {
+  font-size: 1.25rem;
+  transition: transform 0.1s ease;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+}
+
+.star-rating button:hover {
+  transform: scale(1.2);
+}
+
+/* Movie card hover effect */
+.movie-card-hover {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.movie-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Modal backdrop blur */
+.modal-backdrop {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #f5c518 0%, #e63946 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Notification toast custom styles */
+.toast-cinema {
+  background: #16161f !important;
+  border: 1px solid #1e1e2e !important;
+  color: #e8e8f0 !important;
+}
