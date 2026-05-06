@@ -53,9 +53,7 @@ export default function App() {
       <footer className="text-center text-gray-400 py-5 border-t border-gray-800 bg-[#0a0a0f]">
         <p>© 2026 MovieCircle</p>
         <p className="text-xs mt-1">Developed by swapNil</p>
-      </footer>
-    </BrowserRouter>
-      
+      </footer>  
     </BrowserRouter>
   );
 }
