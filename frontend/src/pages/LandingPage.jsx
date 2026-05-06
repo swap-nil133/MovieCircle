@@ -33,7 +33,9 @@ export default function LandingPage() {
           Developed by <span className="text-yellow-400 font-medium">SwapNIL</span>
         </p>
         <br>
+        </br>
         <br>
+        </br>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link to="/register" className="btn-primary text-lg px-8 py-3.5">
