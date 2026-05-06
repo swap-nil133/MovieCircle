@@ -64,6 +64,7 @@ const fetchMovieByImdbId = async (imdbId) => {
     backdrop: details.backdrop_path ? `${TMDB_BACKDROP_BASE}${details.backdrop_path}` : '',
     releaseYear: details.release_date ? details.release_date.substring(0, 4) : '',
     language: details.original_language || '',
+    country: details.production_countries?.[0]?.name || '',
     genres: details.genres ? details.genres.map((g) => g.name) : [],
     overview: details.overview || '',
     runtime: details.runtime || 0,
