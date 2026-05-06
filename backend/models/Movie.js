@@ -31,6 +31,10 @@ const movieSchema = new mongoose.Schema(
       type: String,
       default: '',
     },
+    country: {
+      type: String,
+      default: '',
+    },
     genres: [
       {
         type: String,
