@@ -43,20 +43,22 @@ const register = async (req, res) => {
 // POST /api/auth/login
 const login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
-    if (!email || !password) {
-      return res.status(400).json({ message: 'Please provide email and password' });
+    if (!username || !password) {
+      return res.status(400).json({ message: 'Please provide username and password' });
     }
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ username });
+
     if (!user) {
-      return res.status(401).json({ message: 'Invalid email or password' });
+      return res.status(401).json({ message: 'Invalid username or password' });
     }
 
     const isMatch = await user.comparePassword(password);
+
     if (!isMatch) {
-      return res.status(401).json({ message: 'Invalid email or password' });
+      return res.status(401).json({ message: 'Invalid username or password' });
     }
 
     res.json({
@@ -64,6 +66,7 @@ const login = async (req, res) => {
       user: user.toJSON(),
       token: generateToken(user._id),
     });
+
   } catch (error) {
     res.status(500).json({ message: 'Server error during login' });
   }
