@@ -4,17 +4,20 @@ import toast from 'react-hot-toast';
 import useAuthStore from '../context/authStore';
 
 export default function LoginPage() {
-  const [form, setForm] = useState({ email: '', password: '' });
+  const [form, setForm] = useState({ username: '', password: '' });
   const { login, loading } = useAuthStore();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.email || !form.password) {
+
+    if (!form.username || !form.password) {
       toast.error('Please fill in all fields');
       return;
     }
-    const result = await login(form.email, form.password);
+
+    const result = await login(form.username, form.password);
+
     if (result.success) {
       toast.success('Welcome back!');
       navigate('/dashboard');
@@ -36,36 +39,63 @@ export default function LoginPage() {
             <div className="w-10 h-10 rounded-xl bg-cinema-gold flex items-center justify-center text-cinema-black font-bold group-hover:scale-105 transition-transform">
               🎬
             </div>
-            <span className="font-display text-xl font-bold text-cinema-text">MovieCircle</span>
+            <span className="font-display text-xl font-bold text-cinema-text">
+              MovieCircle
+            </span>
           </Link>
-          <h1 className="font-display text-3xl font-bold text-cinema-text">Welcome back</h1>
-          <p className="text-cinema-subtle mt-2">Sign in to your account</p>
+
+          <h1 className="font-display text-3xl font-bold text-cinema-text">
+            Welcome back
+          </h1>
+
+          <p className="text-cinema-subtle mt-2">
+            Sign in to your account
+          </p>
         </div>
 
         <div className="card p-8">
           <form onSubmit={handleSubmit} className="space-y-5">
+
             <div>
-              <label className="block text-sm font-medium text-cinema-subtle mb-2">Email</label>
+              <label className="block text-sm font-medium text-cinema-subtle mb-2">
+                Username
+              </label>
+
               <input
-                type="email"
+                type="text"
                 className="input-field"
-                placeholder="you@example.com"
-                value={form.email}
-                onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-                autoComplete="email"
+                placeholder="Enter your username"
+                value={form.username}
+                onChange={(e) =>
+                  setForm((f) => ({
+                    ...f,
+                    username: e.target.value,
+                  }))
+                }
+                autoComplete="username"
               />
             </div>
+
             <div>
-              <label className="block text-sm font-medium text-cinema-subtle mb-2">Password</label>
+              <label className="block text-sm font-medium text-cinema-subtle mb-2">
+                Password
+              </label>
+
               <input
                 type="password"
                 className="input-field"
                 placeholder="••••••••"
                 value={form.password}
-                onChange={(e) => setForm((f) => ({ ...f, password: e.target.value }))}
+                onChange={(e) =>
+                  setForm((f) => ({
+                    ...f,
+                    password: e.target.value,
+                  }))
+                }
                 autoComplete="current-password"
               />
             </div>
+
             <button
               type="submit"
               disabled={loading}
@@ -85,7 +115,10 @@ export default function LoginPage() {
 
         <p className="text-center text-cinema-subtle mt-6 text-sm">
           Don't have an account?{' '}
-          <Link to="/register" className="text-cinema-gold hover:text-cinema-gold-dim font-medium transition-colors">
+          <Link
+            to="/register"
+            className="text-cinema-gold hover:text-cinema-gold-dim font-medium transition-colors"
+          >
             Create one free
           </Link>
         </p>
