@@ -12,10 +12,10 @@ const useAuthStore = create((set, get) => ({
   setLoading: (loading) => set({ loading }),
   setError: (error) => set({ error }),
 
-  login: async (email, password) => {
+  login: async (username, password) => {
     set({ loading: true, error: null });
     try {
-      const { data } = await api.post('/auth/login', { email, password });
+      const { data } = await api.post('/auth/login', { username, password });
       localStorage.setItem('mc_token', data.token);
       localStorage.setItem('mc_user', JSON.stringify(data.user));
       set({ user: data.user, token: data.token, loading: false });
