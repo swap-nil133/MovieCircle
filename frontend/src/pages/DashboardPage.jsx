@@ -30,7 +30,7 @@ export default function DashboardPage() {
               Hey, <span className="gradient-text">{user?.username}</span> 👋
             </h1>
             <span>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-white-500 mt-1">
                Developed by <span className="text-yellow-400 font-medium">SwapNIL</span>
               </p>
             </span>
