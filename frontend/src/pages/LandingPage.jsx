@@ -38,11 +38,11 @@ export default function LandingPage() {
         </br>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to="/register" className="btn-primary text-lg px-8 py-3.5">
-            Get Started Free
+          <Link to="/login" className="btn-primary text-lg px-8 py-3.5">
+            Login
           </Link>
-          <Link to="/login" className="btn-secondary text-lg px-8 py-3.5">
-            Sign In
+          <Link to="/register" className="btn-secondary text-lg px-8 py-3.5">
+            Register
           </Link>
         </div>
 
