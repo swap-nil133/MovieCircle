@@ -45,7 +45,12 @@ export default function ChangePasswordPage() {
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
       <div className="w-full max-w-md card p-8 animate-scale-in">
-
+        <button
+          onClick={() => navigate('/dashboard')}
+          className="text-sm text-cinema-subtle hover:text-cinema-text transition-colors mb-5">
+          ← Back
+        </button>
+        
         <h1 className="font-display text-3xl font-bold text-cinema-text mb-2">
           Change Password
         </h1>
