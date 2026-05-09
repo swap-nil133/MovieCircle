@@ -82,4 +82,40 @@ const getMe = async (req, res) => {
   }
 };
 
+// PUT /api/auth/change-password
+const changePassword = async (req, res) => {
+  try {
+    const { oldPassword, newPassword } = req.body;
+
+    if (!oldPassword || !newPassword) {
+      return res.status(400).json({
+        message: 'Please provide all required fields',
+      });
+    }
+
+    const user = await User.findById(req.user._id);
+
+    const isMatch = await user.comparePassword(oldPassword);
+
+    if (!isMatch) {
+      return res.status(401).json({
+        message: 'Current password is incorrect',
+      });
+    }
+
+    user.password = newPassword;
+
+    await user.save();
+
+    res.json({
+      message: 'Password updated successfully',
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      message: 'Server error updating password',
+    });
+  }
+};
+
 module.exports = { register, login, getMe };
