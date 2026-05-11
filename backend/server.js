@@ -20,6 +20,7 @@ app.use('/api/groups', require('./routes/groups'));
 app.use('/api/movies', require('./routes/movies'));
 app.use('/api/ratings', require('./routes/ratings'));
 app.use('/api/watched', require('./routes/watched'));
+app.use('/api/watchlater', require('./routes/watchlater'));
 
 // Health check
 app.get('/api/health', (req, res) => {
