@@ -10,6 +10,7 @@ export default function MovieCard({ movie, groupId, onClick, onRefresh, style })
 
   const {
     updateMovieWatched,
+    updateWatchLater,
   } = useMovieStore();
 
   const [toggling, setToggling] = useState(false);
