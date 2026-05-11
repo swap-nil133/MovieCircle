@@ -182,6 +182,7 @@ export default function GroupPage() {
               { id: 'all', label: '🎬 All Movies' },
               { id: 'top-rated', label: '⭐ Top Rated' },
               { id: 'recommendations', label: '🎯 For You' },
+              { id: 'watch-later', label: '📌 Watch Later' },
             ].map(({ id, label }) => (
               <button
                 key={id}
