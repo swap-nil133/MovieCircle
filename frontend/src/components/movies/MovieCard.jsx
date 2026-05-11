@@ -56,37 +56,40 @@ export default function MovieCard({ movie, groupId, onClick, onRefresh, style })
     }
   };
 
-  // WATCH LATER
-  const handleWatchLater = async (e) => {
-    e.stopPropagation();
+// WATCH LATER
+const handleWatchLater = async (e) => {
+  e.stopPropagation();
 
-    if (watchLaterLoading) return;
+  if (watchLaterLoading) return;
 
-    setWatchLaterLoading(true);
+  setWatchLaterLoading(true);
 
-    try {
-      const { data } = await api.post('/watchlater/toggle', {
-        movieId: movie._id,
-        groupId,
-      });
+  try {
+    const { data } = await api.post('/watchlater/toggle', {
+      movieId: movie._id,
+      groupId,
+    });
 
-      toast.success(
-        data.saved
-          ? '📌 Added to Watch Later'
-          : 'Removed from Watch Later'
-      );
+    // INSTANT UI UPDATE
+    updateWatchLater(movie._id, data.saved);
 
-      if (onRefresh) onRefresh();
+    toast.success(
+      data.saved
+        ? '📌 Added to Watch Later'
+        : 'Removed from Watch Later'
+    );
 
-    } catch (err) {
-      toast.error(
-        err.response?.data?.message ||
-        'Failed to update watch later'
-      );
-    } finally {
-      setWatchLaterLoading(false);
-    }
-  };
+    if (onRefresh) onRefresh();
+
+  } catch (err) {
+    toast.error(
+      err.response?.data?.message ||
+      'Failed to update watch later'
+    );
+  } finally {
+    setWatchLaterLoading(false);
+  }
+};
 
   const isWatched = movie.userWatched;
   const isWatchLater = movie.userWatchLater;
